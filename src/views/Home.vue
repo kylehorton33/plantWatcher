@@ -67,14 +67,18 @@
               </v-img>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn icon>
+                <!-- add loaders: https://vuetifyjs.com/en/components/buttons/ -->
+                <v-btn icon @click="happyButton(plant.id)">
                   <v-icon class="success--text">mdi-emoticon-happy</v-icon>
                 </v-btn>
-                <v-btn icon>
+                <v-btn icon @click="sadButton(plant.id)">
                   <v-icon class="error--text">mdi-emoticon-sad</v-icon>
                 </v-btn>
-                <v-btn icon>
+                <v-btn icon @click="uploadNewPhoto(plant.id)">
                   <v-icon>mdi-camera</v-icon>
+                </v-btn>
+                <v-btn icon @click="goToPlantPage(plant.id)">
+                  <v-icon>mdi-information-outline</v-icon>
                 </v-btn>
               </v-card-actions>
             </v-card>
@@ -101,5 +105,19 @@
         {id: 3, name: 'hosta', latest_pic: 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F37%2F2020%2F06%2F10%2Ffrancee-hosta-purple-flowers-562666cc.jpg'},
       ],
     }),
+    methods: {
+      goToPlantPage(id) {
+        this.$router.push(`/plant/${id}`);
+      },
+      happyButton(id) {
+        alert(`Plant ${id} is HAPPY! :)`)
+      },
+      sadButton(id) {
+        alert(`Plant ${id} is sad... :(`)
+      },
+      uploadNewPhoto(id) {
+        alert('TODO: Implement a dialog box for photo upload' + id)
+      },
+    },
   }
 </script>
