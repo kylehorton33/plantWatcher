@@ -13,5 +13,6 @@ new Vue({
   render: h => h(App),
   created () {
     this.$store.dispatch('loadPlants')
+    this.$store.dispatch('loadLogs')
   }
 }).$mount('#app')

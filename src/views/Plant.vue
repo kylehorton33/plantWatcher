@@ -40,7 +40,7 @@
             <v-sheet rounded="lg">
               <v-list color="transparent">
                 <v-list-item
-                  v-for="log in plant.logs"
+                  v-for="log in logs"
                   :key="log.timestamp"
                   link
                 >
@@ -50,7 +50,7 @@
                       {{ log.msg }}
                     </v-list-item-title>
                     <v-list-item-subtitle>
-                        {{ log.timestamp }}
+                        {{ new Date(log.timestamp) }}
                     </v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
@@ -83,6 +83,9 @@
     computed: {
       plant() {
         return this.$store.getters.loadedPlant(this.plantId);
+      },
+      logs() {
+        return this.$store.getters.singlePlantLogs(this.plantId);
       }
     },
     methods: {

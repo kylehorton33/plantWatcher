@@ -111,10 +111,18 @@
         this.$router.push(`/plant/${id}`);
       },
       happyButton(id) {
-        alert(`Plant ${id} is HAPPY! :)`)
+        this.$store.dispatch('addLog', {
+          id,
+          icon: 'mdi-emoticon-happy',
+          msg: 'add a smile!',
+        })
       },
       sadButton(id) {
-        alert(`Plant ${id} is sad... :(`)
+        this.$store.dispatch('addLog', {
+          id,
+          icon: 'mdi-emoticon-sad',
+          msg: 'feelin bad...',
+        })
       },
       uploadNewPhoto(id) {
         alert('TODO: Implement a dialog box for photo upload' + id)

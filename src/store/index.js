@@ -8,6 +8,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     loadedPlants: [],
+    loadedLogs: [],
     loading: false,
   },
   mutations: {
@@ -20,6 +21,12 @@ export default new Vuex.Store({
     setLoading (state, payload) {
       state.loading = payload
     },
+    setLoadedLogs (state, payload) {
+      state.loadedLogs = payload
+    },
+    addLog (state, payload) {
+      state.loadedLogs.push(payload)
+    }
   },
   actions: {
     loadPlants ({commit}) {
@@ -29,12 +36,7 @@ export default new Vuex.Store({
           added_at: 1626140625,
           updated_at: 1626140625,
           name: 'hosta',
-          latest_pic: 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F37%2F2020%2F06%2F10%2Ffrancee-hosta-purple-flowers-562666cc.jpg',
-          logs: [
-            { timestamp: 12318973912, msg: 'Looking good!', icon: 'mdi-emoticon-happy' },
-            { timestamp: 23489283472, msg: 'Looking good!', icon: 'mdi-emoticon-happy' },
-            { timestamp: 34534534522, msg: 'Looking good!', icon: 'mdi-emoticon-happy' },
-          ],
+          latest_pic: 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F37%2F2020%2F06%2F10%2Ffrancee-hosta-purple-flowers-562666cc.jpg'
         },
         { id: '6175de1d-d79e-4606-841a-77c3e7ba734f',
           added_at: 1626140640,
@@ -67,6 +69,23 @@ export default new Vuex.Store({
         updated_at: d.getTime(),
         id: uuidv4(),
       })
+    },
+    loadLogs ({commit}) {
+      commit('setLoading', true)
+      const LOGS = [
+        { id: '51a73e58-44e3-4756-a60c-597451dbb588', timestamp: 12318973912, msg: 'Looking good!', icon: 'mdi-emoticon-happy' },
+        { id: '51a73e58-44e3-4756-a60c-597451dbb588', timestamp: 23489283472, msg: 'Looking good!', icon: 'mdi-emoticon-happy' },
+        { id: '0d1ec9f6-a8aa-4065-bf3b-039a090e68cb', timestamp: 34534534522, msg: 'Looking good!', icon: 'mdi-emoticon-happy' },
+      ]
+      commit('setLoadedLogs', LOGS)
+      commit('setLoading', false)
+    },
+    addLog({commit}, payload) {
+      const log = {
+        ...payload,
+        timestamp: new Date().getTime()
+      }
+      commit('addLog', log)
     }
   },
   getters: {
@@ -79,6 +98,16 @@ export default new Vuex.Store({
       return (id) => {
         return state.loadedPlants.find((plant) => {
           return plant.id === id
+        })
+      }
+    },
+    singlePlantLogs (state) {
+      return (id) => {
+        const filtered_logs = state.loadedLogs.filter((log) => {
+          return log.id === id
+        })
+        return filtered_logs.sort((A, B) => {
+          return A.timestamp < B.timestamp
         })
       }
     },
