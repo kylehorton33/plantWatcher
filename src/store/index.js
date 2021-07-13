@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import { v4 as uuidv4 } from 'uuid';
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -11,6 +13,9 @@ export default new Vuex.Store({
   mutations: {
     setLoadedPlants (state, payload) {
       state.loadedPlants = payload
+    },
+    createPlant (state, payload) {
+      state.loadedPlants.push(payload)
     },
     setLoading (state, payload) {
       state.loading = payload
@@ -42,13 +47,32 @@ export default new Vuex.Store({
       commit('setLoadedPlants', PLANTS)
       commit('setLoading', false)
     },
+    createPlant({commit, getters}, payload) {
+      const plant = {
+        name: payload.name,
+        latest_pic: payload.latest_pic,
+        location: payload.location,
+        created_by: getters.user.id,
+      }
+      // api request to create on server
+      const d = new Date()
+      commit('createPlant', {
+        ...plant,
+        created_at: d.getTime(),
+        updated_at: d.getTime(),
+        id: uuidv4(),
+      })
+    }
   },
   getters: {
     loadedPlants (state) {
       return state.loadedPlants.sort((A, B) => {
         return A.updated_at < B.updated_at
       })
-    }
+    },
+    user () {
+      return 'kinglsey'
+    },
   },
   modules: {
   }
