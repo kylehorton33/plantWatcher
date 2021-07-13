@@ -33,14 +33,14 @@
     <v-main class="grey lighten-3">
       <v-container>
         <v-row>
-            <h1 class="mx-8">Plant {{ plantId }}</h1>
+            <h1 class="mx-8">Plant {{ plant.name }}</h1>
         </v-row>
         <v-row>
           <v-col cols="3">
             <v-sheet rounded="lg">
               <v-list color="transparent">
                 <v-list-item
-                  v-for="log in logs"
+                  v-for="log in plant.logs"
                   :key="log.timestamp"
                   link
                 >
@@ -63,7 +63,7 @@
               min-height="70vh"
               rounded="lg"
             >
-              <v-img src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F37%2F2020%2F06%2F10%2Ffrancee-hosta-purple-flowers-562666cc.jpg"></v-img>
+              <v-img v-if="plant" :src="plant.latest_pic"></v-img>
             </v-card>
           </v-col>
         </v-row>
@@ -76,14 +76,14 @@
   export default {
     data: () => ({
       plantId: null,
-      logs: [
-          { timestamp: 12318973912, msg: 'Looking good!', icon: 'mdi-emoticon-happy' },
-          { timestamp: 23489283472, msg: 'Looking good!', icon: 'mdi-emoticon-happy' },
-          { timestamp: 34534534522, msg: 'Looking good!', icon: 'mdi-emoticon-happy' },
-      ],
     }),
     created() {
         this.plantId = this.$route.params.id;
+    },
+    computed: {
+      plant() {
+        return this.$store.getters.loadedPlant(this.plantId);
+      }
     },
     methods: {
         goToAllPlants() {
