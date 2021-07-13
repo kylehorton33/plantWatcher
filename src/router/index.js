@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Plant from '../views/Plant.vue'
+import AddPlant from '../views/AddPlant.vue'
 
 Vue.use(VueRouter)
 
@@ -10,6 +11,16 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/plant/new',
+    name: 'AddPlant',
+    component: AddPlant
+  },
+  {
+    path: '/logout',
+    name: 'Logout',
+    redirect: '/login'
   },
   {
     path: '/plant/:id',

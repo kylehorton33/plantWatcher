@@ -3,7 +3,7 @@
     <v-app-bar app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-avatar class="primary mx-2" size="40">
-        <span class="white--text">KH</span>
+        <span class="white--text">Ky</span>
       </v-avatar>
       <v-toolbar-title>Plant Watcher</v-toolbar-title>
     </v-app-bar>
@@ -34,6 +34,7 @@
         <v-list-item
           v-for="item in items"
           :key="item.title"
+          :to="item.link"
           link
         >
           <v-list-item-icon>
@@ -95,9 +96,9 @@
       drawer: null,
       username: 'kingsley',
       items: [
-        { title: 'Oldest', icon: 'mdi-clock-outline' },
-        { title: 'Add', icon: 'mdi-plus' },
-        { title: 'About', icon: 'mdi-help-box' },
+        { title: 'Add', icon: 'mdi-plus', link: '/plant/new' },
+        { title: 'Logout', icon: 'mdi-exit-run', link: '/logout' },
+        { title: 'About', icon: 'mdi-help-box', link: '/about' },
       ],
       plants: [
         {id: 1, name: 'hosta', latest_pic: 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F37%2F2020%2F06%2F10%2Ffrancee-hosta-purple-flowers-562666cc.jpg'},
