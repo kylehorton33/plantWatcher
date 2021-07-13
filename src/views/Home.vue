@@ -100,12 +100,12 @@
         { title: 'Logout', icon: 'mdi-exit-run', link: '/logout' },
         { title: 'About', icon: 'mdi-help-box', link: '/about' },
       ],
-      plants: [
-        {id: 1, name: 'hosta', latest_pic: 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F37%2F2020%2F06%2F10%2Ffrancee-hosta-purple-flowers-562666cc.jpg'},
-        {id: 2, name: 'hosta', latest_pic: 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F37%2F2020%2F06%2F10%2Ffrancee-hosta-purple-flowers-562666cc.jpg'},
-        {id: 3, name: 'hosta', latest_pic: 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F37%2F2020%2F06%2F10%2Ffrancee-hosta-purple-flowers-562666cc.jpg'},
-      ],
     }),
+    computed: {
+      plants() {
+        return this.$store.getters.loadedPlants
+      },
+    },
     methods: {
       goToPlantPage(id) {
         this.$router.push(`/plant/${id}`);

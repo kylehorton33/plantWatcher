@@ -10,5 +10,8 @@ new Vue({
   router,
   store,
   vuetify,
-  render: h => h(App)
+  render: h => h(App),
+  created () {
+    this.$store.dispatch('loadPlants')
+  }
 }).$mount('#app')
