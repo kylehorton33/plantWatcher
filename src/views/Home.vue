@@ -69,6 +69,9 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <!-- add loaders: https://vuetifyjs.com/en/components/buttons/ -->
+                <v-btn icon @click="waterIt(plant.id)">
+                  <v-icon>mdi-watering-can-outline</v-icon>
+                </v-btn>
                 <v-btn icon @click="happyButton(plant.id)">
                   <v-icon class="success--text">mdi-emoticon-happy</v-icon>
                 </v-btn>
@@ -107,6 +110,13 @@
       },
     },
     methods: {
+      waterIt(id) {
+        this.$store.dispatch('addLog', {
+          id,
+          icon: 'mdi-watering-can-outline',
+          msg: 'wet wet wet!',
+        })
+      },
       goToPlantPage(id) {
         this.$router.push(`/plant/${id}`);
       },
