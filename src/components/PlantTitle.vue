@@ -21,7 +21,7 @@
         </h6>
         <h6>
             <v-icon>mdi-calendar-month</v-icon>
-            Growing since July 14 2021
+            Growing together since {{ new Date(plant.added_at).toLocaleDateString() }}
         </h6>
     </div>
 </template>
