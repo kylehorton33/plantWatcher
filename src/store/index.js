@@ -36,6 +36,13 @@ export default new Vuex.Store({
     loadPlants ({commit}) {
       commit('setLoading', true)
       const PLANTS = [
+        { id: 'new',
+          name: 'new plant',
+          added_at: 0,
+          updated_at: 0,
+          location: '',
+          latest_pic: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.ZqqJYrgFspbx-gGFudtl4wHaHa%26pid%3DApi&f=1'
+        },
         { id: '51a73e58-44e3-4756-a60c-597451dbb588',
           added_at: 1626140625,
           updated_at: 1626140625,
@@ -60,6 +67,18 @@ export default new Vuex.Store({
       ]
       commit('setLoadedPlants', PLANTS)
       commit('setLoading', false)
+    },
+    createNewPlant({commit}) {
+      return new Promise((resolve) => {
+        console.log('promise triggered')
+        commit('createPlant', {
+          id: 'new',
+          name: '',
+          latest_pic: '',
+          location: '',
+        })
+        resolve()
+      })
     },
     createPlant({commit, getters}, payload) {
       const plant = {

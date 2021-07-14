@@ -14,14 +14,7 @@
 
 <script>
 export default {
-    computed: {
-        id() {
-            return this.$store.getters.focusedPlantId
-        },
-        plant() {
-            return this.$store.getters.loadedPlant(this.id)
-        }
-    }
+    props: ['plant']
 }
 </script>
 

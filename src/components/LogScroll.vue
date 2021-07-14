@@ -22,14 +22,7 @@
 
 <script>
 export default {
-    computed: {
-        id() {
-            return this.$store.getters.focusedPlantId
-        },
-        logs() {
-            return this.$store.getters.singlePlantLogs(this.id)
-        }
-    }
+    props: ['logs']
 }
 </script>
 

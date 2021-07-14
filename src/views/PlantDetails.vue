@@ -4,22 +4,24 @@
     <v-main class="grey lighten-3" :style="{ 'padding' : '0px' }">
       <v-container :style="{ 'max-width': '960px' }">
         <v-row>
-          <v-col>
-            <PlantTitle />
+          <v-col cols="10">
+            <PlantTitle :plant="plant" />
+          </v-col>
+          <v-col cols="2" align="right" class="mt-2">
+            <v-icon>mdi-cog</v-icon>
           </v-col>
         </v-row>
         <v-row>
           <v-col cols="3">
-            <!-- MOVE TO ABOVE LOG SCROLL (SUN, WATER ONLY) -->
             <v-row>
               <v-col>
-                <CycleIcons />
+                <CycleIcons :plant="plant" />
               </v-col>
             </v-row>
-            <LogScroll />
+            <LogScroll :logs="logs" />
           </v-col>
           <v-col cols="9">
-            <PlantImage />
+            <PlantImage :plant="plant" />
           </v-col>
         </v-row>
       </v-container>
@@ -39,16 +41,24 @@ import PlantImage from '../components/PlantImage.vue'
     components: {
       MainNav, PlantTitle, CycleIcons, LogScroll, PlantImage
     },
+    data() {
+      return {
+        id: null,
+      }
+    },
     created() {
-        this.$store.dispatch('focusPlant', this.$route.params.id);
+        this.id = this.$route.params.id;
+        if (!this.id) {
+          this.id = 'new'
+        }
     },
     computed: {
-      plant() {
-        return this.$store.getters.loadedPlant(this.plantId);
-      },
-      logs() {
-        return this.$store.getters.singlePlantLogs(this.plantId);
-      }
+        plant() {
+            return this.$store.getters.loadedPlant(this.id)
+        },
+        logs() {
+            return this.$store.getters.singlePlantLogs(this.id)
+        }
     },
     methods: {
         goToAllPlants() {
