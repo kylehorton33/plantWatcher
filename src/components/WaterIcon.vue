@@ -1,8 +1,8 @@
 <template>
   <div>
     <v-progress-circular
-      size="80"
-      width="10"
+      size="50"
+      width="5"
       value="20"
       color="blue"
     >

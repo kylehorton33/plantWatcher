@@ -8,14 +8,14 @@
             <PlantTitle />
           </v-col>
         </v-row>
-        <!-- MOVE TO ABOVE LOG SCROLL (SUN, WATER ONLY) -->
-        <v-row>
-          <v-col>
-            <CycleIcons />
-          </v-col>
-        </v-row>
         <v-row>
           <v-col cols="3">
+            <!-- MOVE TO ABOVE LOG SCROLL (SUN, WATER ONLY) -->
+            <v-row>
+              <v-col>
+                <CycleIcons />
+              </v-col>
+            </v-row>
             <LogScroll />
           </v-col>
           <v-col cols="9">

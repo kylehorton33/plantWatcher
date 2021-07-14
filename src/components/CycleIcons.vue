@@ -1,14 +1,10 @@
 <template>
-  <v-row>
+  <v-row class="pb-4">
       <v-col align="center">
           <SunIcon />
       </v-col>
       <v-col align="center">
           <WaterIcon />
-      </v-col>
-      <!-- MOVE TO PLANT TITLE -->
-      <v-col align="center">
-          <CalendarIcon />
       </v-col>
   </v-row>
 </template>
@@ -16,11 +12,10 @@
 <script>
 import SunIcon from './SunIcon.vue'
 import WaterIcon from './WaterIcon.vue'
-import CalendarIcon from './CalendarIcon.vue'
 
 export default {
     components: {
-        SunIcon, WaterIcon, CalendarIcon
+        SunIcon, WaterIcon
     }
 
 }
