@@ -74,7 +74,7 @@
           latest_pic: this.imageUrl,
           location: this.selectedLocation,
         }
-        this.$store.dispatch('createPlant', new_plant)
+        this.$store.dispatch('addPlant', new_plant)
         this.$router.push('/')
       }
     },

@@ -3,25 +3,11 @@
     <MainNav />
     <v-main class="grey lighten-3" :style="{ 'padding' : '0px' }">
       <v-container :style="{ 'max-width': '960px' }">
-        <v-row v-if="editMode">
-          <v-col align="center">
-            <div class="pill">
-              edit mode
-            </div>
-          </v-col>
-        </v-row>
         <v-row>
           <v-col cols="10">
             <PlantTitle :plant="plant" />
           </v-col>
           <v-col cols="2" align="right" class="mt-2">
-            <v-icon>mdi-cog</v-icon>
-            <v-icon
-              v-if="id === 'new'"
-              @click="savePlant"
-            >
-              mdi-content-save
-            </v-icon>
           </v-col>
         </v-row>
         <v-row>
@@ -36,6 +22,9 @@
           <v-col cols="9">
             <PlantImage :plant="plant" />
           </v-col>
+        </v-row>
+        <v-row justify="center">
+          <v-btn text class="error" @click="deletePlant">delete me :(</v-btn>
         </v-row>
       </v-container>
     </v-main>
@@ -84,6 +73,11 @@ import PlantImage from '../components/PlantImage.vue'
         },
         savePlant() {
           this.$store.dispatch('createPlant')
+          this.$router.push('/');
+        },
+        deletePlant() {
+          console.log(this.id)
+          this.$store.dispatch('deletePlant', this.id)
           this.$router.push('/');
         }
     }

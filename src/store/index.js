@@ -38,6 +38,11 @@ export default new Vuex.Store({
     exitEditMode (state) {
       state.editMode = false
     },
+    deletePlant (state, payload) {
+      state.loadedPlants = state.loadedPlants.filter((plant) => {
+        return plant.id !== payload
+      })
+    }
   },
   actions: {
     loadPlants ({commit}) {
@@ -74,6 +79,17 @@ export default new Vuex.Store({
       commit('setLoadedPlants', PLANTS)
       commit('setLoading', false)
     },
+    addPlant({commit}, payload) {
+      commit('createPlant', {
+        ...payload,
+        id: uuidv4(),
+        added_at: new Date().getTime(),
+        updated_at: new Date().getTime(),
+      })
+    },
+    deletePlant({commit}, payload) {
+      commit('deletePlant', payload)
+    },
     createPlant({commit, getters}) {
       // plant data to server api - mock in state now
       const newPlant = getters.loadedPlant('new')
@@ -81,7 +97,7 @@ export default new Vuex.Store({
       commit('createPlant', {
         ...newPlant,
         id: uuidv4(),
-        created_at: new Date().getTime(),
+        added_at: new Date().getTime(),
         updated_at: new Date().getTime(),
       })
       // clear plant id='new' data

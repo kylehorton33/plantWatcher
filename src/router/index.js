@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import store from '../store'
 import Home from '../views/Home.vue'
 import PlantDetails from '../views/PlantDetails.vue'
+import AddPlant from '../views/AddPlant.vue'
 
 Vue.use(VueRouter)
 
@@ -15,7 +16,7 @@ const routes = [
   {
     path: '/plant/new',
     name: 'AddPlant',
-    component: PlantDetails
+    component: AddPlant
   },
   {
     path: '/plant/:id',
