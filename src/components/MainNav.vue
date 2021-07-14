@@ -33,10 +33,10 @@
 export default {
     methods: {
         goToHome() {
-            this.$router.push('/')
+            this.$router.push('/').catch(() => {})
         },
         goToNewPlant() {
-            this.$router.push('/plant/new')
+            this.$router.push('/plant/new').catch(() => {})
         }
     }
 }
