@@ -1,9 +1,15 @@
 <template>
-  <div>
-      <SunIcon />
-      <WaterIcon />
-      <CalendarIcon />
-  </div>
+  <v-row>
+      <v-col align="center">
+          <SunIcon />
+      </v-col>
+      <v-col align="center">
+          <WaterIcon />
+      </v-col>
+      <v-col align="center">
+          <CalendarIcon />
+      </v-col>
+  </v-row>
 </template>
 
 <script>

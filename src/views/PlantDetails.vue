@@ -1,13 +1,17 @@
 <template>
   <v-app id="inspire">
     <MainNav />
-    <v-main class="grey lighten-3">
-      <v-container>
+    <v-main class="grey lighten-3" :style="{ 'padding' : '0px' }">
+      <v-container :style="{ 'max-width': '960px' }">
         <v-row>
-          <PlantTitle />
+          <v-col>
+            <PlantTitle />
+          </v-col>
         </v-row>
         <v-row>
-          <CycleIcons />
+          <v-col>
+            <CycleIcons />
+          </v-col>
         </v-row>
         <v-row>
           <v-col cols="3">
