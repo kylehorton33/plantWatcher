@@ -3,8 +3,8 @@
     <v-progress-circular
       size="80"
       width="10"
-      value="0"
-      color="yellow"
+      value="90"
+      color="red"
     >
       <v-icon>mdi-calendar-month</v-icon>
     </v-progress-circular>
