@@ -1,5 +1,19 @@
 <template>
-    <div>
+    <div v-if="editMode">
+        <v-text-field
+            label="Name"
+            model="name"
+            filled
+            dense
+        ></v-text-field>
+        <v-text-field
+            label="Location"
+            model="location"
+            filled
+            dense
+        ></v-text-field>
+    </div>
+    <div v-else>
         <h1>{{  plant.name.toUpperCase() }}</h1>
         <h6>
             <v-icon>mdi-home</v-icon>
@@ -14,7 +28,17 @@
 
 <script>
 export default {
-    props: ['plant']
+    props: ['plant'],
+    data() {
+        return {
+            name: '',
+        }
+    },
+    computed: {
+        editMode() {
+          return this.$store.getters.editMode
+        }
+    }
 }
 </script>
 

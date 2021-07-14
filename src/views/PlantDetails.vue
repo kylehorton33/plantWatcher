@@ -4,7 +4,11 @@
     <v-main class="grey lighten-3" :style="{ 'padding' : '0px' }">
       <v-container :style="{ 'max-width': '960px' }">
         <v-row v-if="editMode">
-          you are editing
+          <v-col align="center">
+            <div class="pill">
+              edit mode
+            </div>
+          </v-col>
         </v-row>
         <v-row>
           <v-col cols="10">
@@ -50,6 +54,7 @@ import PlantImage from '../components/PlantImage.vue'
     components: {
       MainNav, PlantTitle, CycleIcons, LogScroll, PlantImage
     },
+    // bad way to handle id - does not update when accessing 'new' from single plant
     data() {
       return {
         id: null,
@@ -64,10 +69,10 @@ import PlantImage from '../components/PlantImage.vue'
     },
     computed: {
         plant() {
-            return this.$store.getters.loadedPlant(this.id)
+            return this.$store.getters.loadedPlant(this.$route.params.id || 'new')
         },
         logs() {
-            return this.$store.getters.singlePlantLogs(this.id)
+            return this.$store.getters.singlePlantLogs(this.$route.params.id || 'new')
         },
         editMode() {
           return this.$store.getters.editMode
@@ -84,3 +89,16 @@ import PlantImage from '../components/PlantImage.vue'
     }
   }
 </script>
+
+<style scoped>
+.pill {
+  background-color: rgba(251, 255, 0, 0.842);
+  border: none;
+  color:#444;
+  padding: 5px 40px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 16px;
+}
+</style>
