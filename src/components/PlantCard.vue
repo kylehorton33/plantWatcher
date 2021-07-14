@@ -8,8 +8,7 @@
     >
         <v-card-title v-text="plant.name.toUpperCase()"></v-card-title>
     </v-img>
-    <v-card-actions>
-        <v-spacer></v-spacer>
+    <v-card-actions class="justify-center">
         <!-- add loaders: https://vuetifyjs.com/en/components/buttons/ -->
         <v-btn icon @click="waterIt(plant.id)">
             <v-icon>mdi-watering-can-outline</v-icon>

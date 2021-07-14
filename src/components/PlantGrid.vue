@@ -1,11 +1,12 @@
 <template>
-    <v-container fluid>
-        <v-row dense>
+    <v-container>
+        <v-row>
             <v-col
-            v-for="plant in plants"
-            :key="plant.id"
-            cols="6"
-            md="2"
+                v-for="plant in plants"
+                :key="plant.id"
+                cols="12"
+                sm="6"
+                md="4"
             >
              <PlantCard :id="plant.id"/>
             </v-col>
