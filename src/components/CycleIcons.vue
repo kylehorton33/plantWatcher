@@ -6,6 +6,7 @@
       <v-col align="center">
           <WaterIcon />
       </v-col>
+      <!-- MOVE TO PLANT TITLE -->
       <v-col align="center">
           <CalendarIcon />
       </v-col>
