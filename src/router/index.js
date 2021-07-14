@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../store'
 import Home from '../views/Home.vue'
 import PlantDetails from '../views/PlantDetails.vue'
 
@@ -32,6 +33,11 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  store.commit('exitEditMode')
+  next()
 })
 
 export default router

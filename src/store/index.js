@@ -11,6 +11,7 @@ export default new Vuex.Store({
     loadedLogs: [],
     focusedPlantId: null,
     loading: false,
+    editMode: false,
   },
   mutations: {
     setLoadedPlants (state, payload) {
@@ -30,7 +31,13 @@ export default new Vuex.Store({
     },
     setFocusedPlant (state, payload) {
       state.focusedPlantId = payload
-    }
+    },
+    enterEditMode (state) {
+      state.editMode = true
+    },
+    exitEditMode (state) {
+      state.editMode = false
+    },
   },
   actions: {
     loadPlants ({commit}) {
@@ -67,33 +74,23 @@ export default new Vuex.Store({
       commit('setLoadedPlants', PLANTS)
       commit('setLoading', false)
     },
-    createNewPlant({commit}) {
-      return new Promise((resolve) => {
-        console.log('promise triggered')
-        commit('createPlant', {
-          id: 'new',
-          name: '',
-          latest_pic: '',
-          location: '',
-        })
-        resolve()
-      })
-    },
-    createPlant({commit, getters}, payload) {
-      const plant = {
-        name: payload.name,
-        latest_pic: payload.latest_pic,
-        location: payload.location,
-        created_by: getters.user.id,
-      }
-      // api request to create on server
-      const d = new Date()
+    createPlant({commit, getters}) {
+      // plant data to server api - mock in state now
+      const newPlant = getters.loadedPlant('new')
+      newPlant.id = uuidv4()
       commit('createPlant', {
-        ...plant,
-        created_at: d.getTime(),
-        updated_at: d.getTime(),
+        ...newPlant,
         id: uuidv4(),
+        created_at: new Date().getTime(),
+        updated_at: new Date().getTime(),
       })
+      // clear plant id='new' data
+      newPlant.id = 'new',
+      newPlant.name = '',
+      newPlant.updated_at = null,
+      newPlant.location = '',
+      newPlant.latest_pic = 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.ZqqJYrgFspbx-gGFudtl4wHaHa%26pid%3DApi&f=1'
+      // reset state
     },
     loadLogs ({commit}) {
       commit('setLoading', true)
@@ -141,6 +138,9 @@ export default new Vuex.Store({
     },
     focusedPlantId (state) {
       return state.focusedPlantId
+    },
+    editMode (state) {
+      return state.editMode
     },
     user () {
       return 'kinglsey'

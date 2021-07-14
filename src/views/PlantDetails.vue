@@ -3,12 +3,21 @@
     <MainNav />
     <v-main class="grey lighten-3" :style="{ 'padding' : '0px' }">
       <v-container :style="{ 'max-width': '960px' }">
+        <v-row v-if="editMode">
+          you are editing
+        </v-row>
         <v-row>
           <v-col cols="10">
             <PlantTitle :plant="plant" />
           </v-col>
           <v-col cols="2" align="right" class="mt-2">
             <v-icon>mdi-cog</v-icon>
+            <v-icon
+              v-if="id === 'new'"
+              @click="savePlant"
+            >
+              mdi-content-save
+            </v-icon>
           </v-col>
         </v-row>
         <v-row>
@@ -50,6 +59,7 @@ import PlantImage from '../components/PlantImage.vue'
         this.id = this.$route.params.id;
         if (!this.id) {
           this.id = 'new'
+          this.$store.commit('enterEditMode')
         }
     },
     computed: {
@@ -58,11 +68,18 @@ import PlantImage from '../components/PlantImage.vue'
         },
         logs() {
             return this.$store.getters.singlePlantLogs(this.id)
+        },
+        editMode() {
+          return this.$store.getters.editMode
         }
     },
     methods: {
         goToAllPlants() {
-            this.$router.push('/');
+          this.$router.push('/');
+        },
+        savePlant() {
+          this.$store.dispatch('createPlant')
+          this.$router.push('/');
         }
     }
   }
