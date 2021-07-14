@@ -37,9 +37,8 @@ export default new Vuex.Store({
       commit('setLoading', true)
       const PLANTS = [
         { id: 'new',
-          name: 'new plant',
-          added_at: 0,
-          updated_at: 0,
+          name: '',
+          updated_at: null,
           location: '',
           latest_pic: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.ZqqJYrgFspbx-gGFudtl4wHaHa%26pid%3DApi&f=1'
         },

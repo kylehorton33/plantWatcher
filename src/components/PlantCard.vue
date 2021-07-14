@@ -8,7 +8,12 @@
     >
         <v-card-title v-text="plant.name.toUpperCase()"></v-card-title>
     </v-img>
-    <v-card-actions class="justify-center">
+    <v-card-actions v-if="id === 'new'" class="justify-center">
+      <v-btn text @click="goToPlantPage(plant.id)">
+        create new
+      </v-btn>
+    </v-card-actions>
+    <v-card-actions v-else class="justify-center">
         <!-- add loaders: https://vuetifyjs.com/en/components/buttons/ -->
         <v-btn icon @click="waterIt(plant.id)">
             <v-icon>mdi-watering-can-outline</v-icon>
@@ -58,9 +63,6 @@ export default {
           icon: 'mdi-emoticon-sad',
           msg: 'feelin bad...',
         })
-      },
-      uploadNewPhoto(id) {
-        alert('TODO: Implement a dialog box for photo upload' + id)
       },
     },
 }
