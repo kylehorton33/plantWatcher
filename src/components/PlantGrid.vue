@@ -18,13 +18,9 @@
 import PlantCard from '../components/PlantCard.vue'
 
 export default {
+    props: ['plants'],
     components: {
         PlantCard
-    },
-    computed: {
-      plants() {
-        return this.$store.getters.loadedPlants
-      },
     },
 }
 </script>

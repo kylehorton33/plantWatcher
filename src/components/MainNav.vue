@@ -15,7 +15,6 @@
         <v-btn text @click="goToNewPlant">NEW</v-btn>
 
         <v-spacer></v-spacer>
-        <!-- filter logs by search terms -->
         <v-responsive max-width="260">
           <v-text-field
             dense
@@ -23,6 +22,8 @@
             hide-details
             rounded
             solo-inverted
+            v-model="searchText"
+            @input="search"
           ></v-text-field>
         </v-responsive>
       </v-container>
@@ -31,12 +32,20 @@
 
 <script>
 export default {
+    data() {
+      return {
+        searchText: '',
+      }
+    },
     methods: {
         goToHome() {
             this.$router.push('/').catch(() => {})
         },
         goToNewPlant() {
             this.$router.push('/plant/new').catch(() => {})
+        },
+        search() {
+          this.$emit('filter', this.searchText)
         }
     }
 }
