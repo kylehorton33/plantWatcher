@@ -56,33 +56,24 @@ export default new Vuex.Store({
       commit('setLoading', false)
     },
     addPlant({commit}, payload) {
-      commit('createPlant', {
+      const newPlant = {
         ...payload,
         id: uuidv4(),
         added_at: new Date().getTime(),
         updated_at: new Date().getTime(),
-      })
+      }
+      axios.post('http://localhost:3000/plants', newPlant)
+        .then(() => {
+          commit('createPlant', newPlant )
+        })
+        .catch((err) => console.log(err))
     },
     deletePlant({commit}, payload) {
-      commit('deletePlant', payload)
-    },
-    createPlant({commit, getters}) {
-      // plant data to server api - mock in state now
-      const newPlant = getters.loadedPlant('new')
-      newPlant.id = uuidv4()
-      commit('createPlant', {
-        ...newPlant,
-        id: uuidv4(),
-        added_at: new Date().getTime(),
-        updated_at: new Date().getTime(),
-      })
-      // clear plant id='new' data
-      newPlant.id = 'new',
-      newPlant.name = '',
-      newPlant.updated_at = null,
-      newPlant.location = '',
-      newPlant.latest_pic = 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.ZqqJYrgFspbx-gGFudtl4wHaHa%26pid%3DApi&f=1'
-      // reset state
+      axios.delete('http://localhost:3000/plants/'+payload)
+        .then(() => {
+          commit('deletePlant', payload)
+        })
+        .catch((err) => console.log(err))
     },
     loadLogs ({commit}) {
       commit('setLoading', true)
@@ -100,9 +91,6 @@ export default new Vuex.Store({
         timestamp: new Date().getTime()
       }
       commit('addLog', log)
-    },
-    focusPlant({commit}, payload) {
-      commit('setFocusedPlant', payload)
     }
   },
   getters: {

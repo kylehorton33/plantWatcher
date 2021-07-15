@@ -76,7 +76,6 @@ import PlantImage from '../components/PlantImage.vue'
           this.$router.push('/');
         },
         deletePlant() {
-          console.log(this.id)
           this.$store.dispatch('deletePlant', this.id)
           this.$router.push('/');
         }
