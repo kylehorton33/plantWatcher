@@ -4,7 +4,6 @@
         <v-list-item
             v-for="log in logs"
             :key="log.timestamp"
-            link
         >
             <v-list-item-content>
             <v-list-item-title>
@@ -15,6 +14,9 @@
                 {{ new Date(log.timestamp).toLocaleDateString() }}
             </v-list-item-subtitle>
             </v-list-item-content>
+            <v-btn icon @click="onDeleteLog(log.id)">
+                <v-icon>mdi-delete</v-icon>
+            </v-btn>
         </v-list-item>
         </v-list>
     </v-sheet>
@@ -22,7 +24,13 @@
 
 <script>
 export default {
-    props: ['logs']
+    props: ['logs'],
+    methods: {
+        onDeleteLog(id) {
+            console.log(id)
+            this.$store.dispatch('deleteLog', id)
+        }
+    }
 }
 </script>
 

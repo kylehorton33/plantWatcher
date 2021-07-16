@@ -43,6 +43,11 @@ export default new Vuex.Store({
       state.loadedPlants = state.loadedPlants.filter((plant) => {
         return plant.id !== payload
       })
+    },
+    deleteLog (state, payload) {
+      state.loadedLogs = state.loadedLogs.filter((log) => {
+        return log.id !== payload
+      })
     }
   },
   actions: {
@@ -77,21 +82,33 @@ export default new Vuex.Store({
     },
     loadLogs ({commit}) {
       commit('setLoading', true)
-      const LOGS = [
-        { id: '51a73e58-44e3-4756-a60c-597451dbb588', timestamp: 12318973912, msg: 'Looking good!', icon: 'mdi-emoticon-happy' },
-        { id: '51a73e58-44e3-4756-a60c-597451dbb588', timestamp: 23489283472, msg: 'Looking good!', icon: 'mdi-emoticon-happy' },
-        { id: '0d1ec9f6-a8aa-4065-bf3b-039a090e68cb', timestamp: 34534534522, msg: 'Looking good!', icon: 'mdi-emoticon-happy' },
-      ]
-      commit('setLoadedLogs', LOGS)
+      axios.get('http://localhost:3000/logs')
+        .then((res) => {
+          commit('setLoadedLogs', res.data)
+        })
+        .catch((err) => console.log(err))
+      
       commit('setLoading', false)
     },
     addLog({commit}, payload) {
-      const log = {
+      const newLog = {
         ...payload,
+        id: uuidv4(),
         timestamp: new Date().getTime()
       }
-      commit('addLog', log)
-    }
+      axios.post('http://localhost:3000/logs', newLog)
+        .then(() => {
+          commit('addLog', newLog)
+        })
+        .catch((err) => console.log(err))
+    },
+    deleteLog({commit}, payload) {
+      axios.delete('http://localhost:3000/logs/'+payload)
+        .then(() => {
+          commit('deleteLog', payload)
+        })
+        .catch((err) => console.log(err))
+    },
   },
   getters: {
     loadedPlants (state) {
@@ -109,7 +126,7 @@ export default new Vuex.Store({
     singlePlantLogs (state) {
       return (id) => {
         const filtered_logs = state.loadedLogs.filter((log) => {
-          return log.id === id
+          return log.plant_id === id
         })
         return filtered_logs.sort((A, B) => {
           return A.timestamp < B.timestamp

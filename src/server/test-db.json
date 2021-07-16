@@ -48,5 +48,21 @@
       "added_at": 1626317983777,
       "updated_at": 1626317983777
     }
+  ],
+  "logs": [
+    {
+      "plant_id": "6175de1d-d79e-4606-841a-77c3e7ba734f",
+      "icon": "mdi-emoticon-happy",
+      "msg": "add a smile!",
+      "id": "a82c80a4-5394-4d36-94bf-cae08139d221",
+      "timestamp": 1626464037508
+    },
+    {
+      "plant_id": "0d1ec9f6-a8aa-4065-bf3b-039a090e68cb",
+      "icon": "mdi-emoticon-happy",
+      "msg": "add a smile!",
+      "id": "d561dd40-d94b-4b32-9bd3-f92b84824bc3",
+      "timestamp": 1626464039666
+    }
   ]
 }

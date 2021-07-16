@@ -40,9 +40,9 @@ export default {
         }
     },
     methods: {
-      waterIt(id) {
+      waterIt(plant_id) {
         this.$store.dispatch('addLog', {
-          id,
+          plant_id,
           icon: 'mdi-watering-can-outline',
           msg: 'wet wet wet!',
         })
@@ -50,16 +50,16 @@ export default {
       goToPlantPage(id) {
         this.$router.push(`/plant/${id}`);
       },
-      happyButton(id) {
+      happyButton(plant_id) {
         this.$store.dispatch('addLog', {
-          id,
+          plant_id,
           icon: 'mdi-emoticon-happy',
           msg: 'add a smile!',
         })
       },
-      sadButton(id) {
+      sadButton(plant_id) {
         this.$store.dispatch('addLog', {
-          id,
+          plant_id,
           icon: 'mdi-emoticon-sad',
           msg: 'feelin bad...',
         })
