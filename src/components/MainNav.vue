@@ -5,17 +5,18 @@
       flat
     >
       <v-container class="py-0 fill-height">
-        <v-avatar
-          class="mr-10"
-          color="grey darken-1"
-          size="32"
-        ></v-avatar>
-
-        <v-btn text @click="goToHome">HOME</v-btn>
-        <v-btn text @click="goToNewPlant">NEW</v-btn>
-
-        <v-spacer></v-spacer>
-        <v-responsive max-width="260">
+        <v-row justify="center">
+          <v-col cols="8">
+            <v-avatar
+              class="mr-8"
+              color="grey darken-1"
+              size="32"
+            ></v-avatar>
+              <v-btn text @click="goToHome">HOME</v-btn>
+              <v-btn text @click="goToNewPlant">NEW</v-btn>
+          </v-col>
+          <v-col cols="4" align="right">
+            <v-responsive max-width="400">
           <v-text-field
             dense
             flat
@@ -26,6 +27,8 @@
             @input="search"
           ></v-text-field>
         </v-responsive>
+          </v-col>
+        </v-row>
       </v-container>
     </v-app-bar>
 </template>
