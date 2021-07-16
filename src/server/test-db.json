@@ -47,6 +47,14 @@
       "id": "13c74c5c-e87b-49a6-b87b-684450560430",
       "added_at": 1626317983777,
       "updated_at": 1626317983777
+    },
+    {
+      "name": "palm tree",
+      "latest_pic": "https://upload.wikimedia.org/wikipedia/commons/7/7a/1859-Martinique.web.jpg",
+      "location": "INSIDE",
+      "id": "de462ca8-65a0-4fdf-ba1c-ddcf88475c99",
+      "added_at": 1626474112286,
+      "updated_at": 1626474112286
     }
   ],
   "logs": [
@@ -63,6 +71,13 @@
       "msg": "add a smile!",
       "id": "d561dd40-d94b-4b32-9bd3-f92b84824bc3",
       "timestamp": 1626464039666
+    },
+    {
+      "plant_id": "de462ca8-65a0-4fdf-ba1c-ddcf88475c99",
+      "icon": "mdi-watering-can-outline",
+      "msg": "wet wet wet!",
+      "id": "4a77e75b-e492-4614-a741-61dd4793f869",
+      "timestamp": 1626474114900
     }
   ]
 }
