@@ -1,10 +1,5 @@
 <template>
-    <v-card
-        min-height="70vh"
-        rounded="lg"
-    >
-        <v-img v-if="plant" :src="plant.latest_pic"></v-img>
-    </v-card>
+    <v-img v-if="plant" :src="plant.latest_pic"></v-img>
 </template>
 
 <script>

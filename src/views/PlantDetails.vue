@@ -11,7 +11,7 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="3">
+          <v-col cols="5">
             <v-row>
               <v-col>
                 <CycleIcons :plant="plant" />
@@ -19,7 +19,7 @@
             </v-row>
             <LogScroll :logs="logs" />
           </v-col>
-          <v-col cols="9">
+          <v-col cols="7">
             <PlantImage :plant="plant" />
           </v-col>
         </v-row>
