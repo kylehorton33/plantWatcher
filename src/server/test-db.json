@@ -78,6 +78,48 @@
       "msg": "wet wet wet!",
       "id": "4a77e75b-e492-4614-a741-61dd4793f869",
       "timestamp": 1626474114900
+    },
+    {
+      "plant_id": "13c74c5c-e87b-49a6-b87b-684450560430",
+      "icon": "mdi-emoticon-happy",
+      "msg": "add a smile!",
+      "id": "a1b2428d-4f2c-4d37-91ab-7538d8ed681e",
+      "timestamp": 1626474586910
+    },
+    {
+      "plant_id": "13c74c5c-e87b-49a6-b87b-684450560430",
+      "icon": "mdi-emoticon-happy",
+      "msg": "add a smile!",
+      "id": "821942fb-2c85-4657-bb08-13440cac7976",
+      "timestamp": 1626474587034
+    },
+    {
+      "plant_id": "13c74c5c-e87b-49a6-b87b-684450560430",
+      "icon": "mdi-emoticon-sad",
+      "msg": "feelin bad...",
+      "id": "5ce99602-4d93-442b-a486-a7e023b13ba5",
+      "timestamp": 1626474594919
+    },
+    {
+      "plant_id": "13c74c5c-e87b-49a6-b87b-684450560430",
+      "icon": "mdi-watering-can-outline",
+      "msg": "wet wet wet!",
+      "id": "310854ce-6490-4276-a463-691be1a5d0fd",
+      "timestamp": 1626474595377
+    },
+    {
+      "plant_id": "de462ca8-65a0-4fdf-ba1c-ddcf88475c99",
+      "icon": "mdi-sprout",
+      "msg": "newlog",
+      "id": "ab4e53d7-80be-4a3f-b15b-a08518b31a14",
+      "timestamp": 1626477607869
+    },
+    {
+      "plant_id": "13c74c5c-e87b-49a6-b87b-684450560430",
+      "icon": "mdi-sprout",
+      "msg": "hi planty",
+      "id": "7a7a4c54-2387-4207-90f6-e8169ec9c042",
+      "timestamp": 1626477618181
     }
   ]
 }

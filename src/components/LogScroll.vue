@@ -1,39 +1,57 @@
 <template>
   <v-sheet rounded="lg">
     <v-list color="transparent">
-        <v-list-item
-            v-for="log in logs"
-            :key="log.timestamp"
-        >
-            <v-list-item-content>
-            <v-list-item-title>
-                <v-icon class="mr-2">{{ log.icon }}</v-icon>
-                {{ log.msg }}
-            </v-list-item-title>
-            <v-list-item-subtitle>
-                {{ new Date(log.timestamp).toLocaleDateString() }}
-            </v-list-item-subtitle>
-            </v-list-item-content>
-            <v-btn icon @click="onDeleteLog(log.id)">
-                <v-icon>mdi-delete</v-icon>
-            </v-btn>
-        </v-list-item>
-        </v-list>
-    </v-sheet>
+      <v-list-item>
+        <v-list-item-icon class="mx-0">
+          <v-icon>{{ icon }}</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content class="ml-4">
+          <v-text-field
+            label="Custom Message"
+            v-model="msg"
+            filled
+            rounded
+            dense
+            :autofocus="true"
+          ></v-text-field>
+        </v-list-item-content>
+        <v-list-item-icon>
+          <v-btn icon @click="onAddLog">
+            <v-icon>mdi-plus</v-icon>
+          </v-btn>
+        </v-list-item-icon>
+      </v-list-item>
+      <Log v-for="log in logs" :log="log" :key="log.timestamp" />
+    </v-list>
+  </v-sheet>
 </template>
 
 <script>
+import Log from "./Log.vue";
+
 export default {
-    props: ['logs'],
-    methods: {
-        onDeleteLog(id) {
-            console.log(id)
-            this.$store.dispatch('deleteLog', id)
-        }
-    }
-}
+  props: ["logs"],
+  data() {
+      return {
+          icon: 'mdi-sprout',
+          msg: ''
+      }
+  },
+  components: {
+    Log,
+  },
+  methods: {
+      onAddLog() {
+          const newLog = {
+              plant_id: this.$route.params.id,
+              icon: this.icon,
+              msg: this.msg
+          }
+          this.$store.dispatch('addLog', newLog)
+      }
+  }
+};
 </script>
 
 <style>
-
 </style>
