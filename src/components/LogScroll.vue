@@ -13,6 +13,7 @@
             rounded
             dense
             :autofocus="true"
+            @keyup="keyListener"
           ></v-text-field>
         </v-list-item-content>
         <v-list-item-icon>
@@ -33,24 +34,30 @@ import Log from "./Log.vue";
 export default {
   props: ["logs"],
   data() {
-      return {
-          icon: 'mdi-sprout',
-          msg: ''
-      }
+    return {
+      icon: "mdi-sprout",
+      msg: "",
+    };
   },
   components: {
     Log,
   },
   methods: {
-      onAddLog() {
-          const newLog = {
-              plant_id: this.$route.params.id,
-              icon: this.icon,
-              msg: this.msg
-          }
-          this.$store.dispatch('addLog', newLog)
+    onAddLog() {
+      const newLog = {
+        plant_id: this.$route.params.id,
+        icon: this.icon,
+        msg: this.msg,
+      };
+      this.$store.dispatch("addLog", newLog);
+      this.msg = "";
+    },
+    keyListener(e) {
+      if (e.key === "Enter") {
+        this.onAddLog();
       }
-  }
+    },
+  },
 };
 </script>
 
