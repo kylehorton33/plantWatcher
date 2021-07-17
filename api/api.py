@@ -4,11 +4,9 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_restful import Api, Resource
 
-from flask_cors import CORS
 from uuid import uuid4
 
 app = Flask(__name__)
-CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
@@ -82,7 +80,7 @@ class PlantListResource(Resource):
         print(plant_schema.dump(new_plant))
         return plant_schema.dump(new_plant)
 
-api.add_resource(PlantListResource, '/plants')
+api.add_resource(PlantListResource, '/api/plants')
 
 class PlantResource(Resource):
     def get(self, plant_id):
@@ -95,7 +93,7 @@ class PlantResource(Resource):
         db.session.commit()
         return '', 204
 
-api.add_resource(PlantResource, '/plants/<string:plant_id>')
+api.add_resource(PlantResource, '/api/plants/<string:plant_id>')
 
 class LogListResource(Resource):
     def get(self):
@@ -115,7 +113,7 @@ class LogListResource(Resource):
         db.session.commit()
         return log_schema.dump(new_log)
 
-api.add_resource(LogListResource, '/logs')
+api.add_resource(LogListResource, '/api/logs')
 
 class LogResource(Resource):
     def get(self, log_id):
@@ -128,4 +126,4 @@ class LogResource(Resource):
         db.session.commit()
         return '', 204
 
-api.add_resource(LogResource, '/logs/<string:log_id>')
+api.add_resource(LogResource, '/api/logs/<string:log_id>')
