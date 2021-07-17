@@ -5,6 +5,7 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
 Vue.use(Vuex)
+const API = "http://localhost:3000";
 
 export default new Vuex.Store({
   state: {
@@ -57,7 +58,7 @@ export default new Vuex.Store({
   actions: {
     loadPlants ({commit}) {
       commit('setLoading', true)
-      axios.get('http://localhost:3000/plants')
+      axios.get(API + '/plants')
         .then((res) => {
           commit('setLoadedPlants', res.data)
         })
@@ -66,7 +67,7 @@ export default new Vuex.Store({
     },
     loadSinglePlant ({commit}, payload) {
       commit('setLoading', true)
-      axios.get('http://localhost:3000/plants/'+payload)
+      axios.get(API + '/plants/'+payload)
         .then((res) => {
           commit('setSinglePlant', res.data)
         })
@@ -80,14 +81,14 @@ export default new Vuex.Store({
         added_at: new Date().getTime(),
         updated_at: new Date().getTime(),
       }
-      axios.post('http://localhost:3000/plants', newPlant)
+      axios.post(API + '/plants', newPlant)
         .then(() => {
           commit('createPlant', newPlant )
         })
         .catch((err) => console.log(err))
     },
     deletePlant({commit}, payload) {
-      axios.delete('http://localhost:3000/plants/'+payload)
+      axios.delete(API + '/plants/'+payload)
         .then(() => {
           commit('deletePlant', payload)
         })
@@ -95,7 +96,7 @@ export default new Vuex.Store({
     },
     loadLogs ({commit}) {
       commit('setLoading', true)
-      axios.get('http://localhost:3000/logs')
+      axios.get(API + '/logs')
         .then((res) => {
           commit('setLoadedLogs', res.data)
         })
@@ -109,14 +110,14 @@ export default new Vuex.Store({
         id: uuidv4(),
         timestamp: new Date().getTime()
       }
-      axios.post('http://localhost:3000/logs', newLog)
+      axios.post(API + '/logs', newLog)
         .then(() => {
           commit('addLog', newLog)
         })
         .catch((err) => console.log(err))
     },
     deleteLog({commit}, payload) {
-      axios.delete('http://localhost:3000/logs/'+payload)
+      axios.delete(API + '/logs/'+payload)
         .then(() => {
           commit('deleteLog', payload)
         })

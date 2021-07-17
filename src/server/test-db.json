@@ -120,6 +120,20 @@
       "msg": "hi planty",
       "id": "7a7a4c54-2387-4207-90f6-e8169ec9c042",
       "timestamp": 1626477618181
+    },
+    {
+      "plant_id": "07af1b2d-f35f-4ca0-b43a-46819a8bd65a",
+      "icon": "mdi-emoticon-happy",
+      "msg": "add a smile!",
+      "id": "43d63145-8c43-427d-969a-b35434597231",
+      "timestamp": 1626486287083
+    },
+    {
+      "plant_id": "07af1b2d-f35f-4ca0-b43a-46819a8bd65a",
+      "icon": "mdi-watering-can-outline",
+      "msg": "wet wet wet!",
+      "id": "d414c0ba-9a7c-49f9-bd70-27d6d83fe74b",
+      "timestamp": 1626486287448
     }
   ]
 }
