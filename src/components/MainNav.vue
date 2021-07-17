@@ -9,9 +9,11 @@
           <v-col cols="8">
             <v-avatar
               class="mr-8"
-              color="grey darken-1"
+              color="grey darken-3"
               size="32"
-            ></v-avatar>
+            >
+              <v-icon size="18" color="green">mdi-sprout</v-icon>
+            </v-avatar>
               <v-btn text @click="goToHome">HOME</v-btn>
               <v-btn text @click="goToNewPlant">NEW</v-btn>
           </v-col>

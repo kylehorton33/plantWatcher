@@ -1,8 +1,8 @@
 <template>
   <v-app id="inspire">
-    <MainNav />
+    <MainNav @filter="filter" />
     <v-main class="grey lighten-3" :style="{ 'padding' : '0px' }">
-      <v-container :style="{ 'max-width': '960px' }">
+      <v-container :style="{ 'max-width': '960px' }" v-if="plant">
         <v-row>
           <v-col cols="10">
             <PlantTitle :plant="plant" />
@@ -17,7 +17,7 @@
                 <CycleIcons :plant="plant" />
               </v-col>
             </v-row>
-            <LogScroll :logs="logs" />
+            <LogScroll :logs="filteredLogs" />
           </v-col>
           <v-col cols="7">
             <PlantImage :plant="plant" />
@@ -47,10 +47,12 @@ import PlantImage from '../components/PlantImage.vue'
     data() {
       return {
         id: null,
+        filterText: "",
       }
     },
     created() {
         this.id = this.$route.params.id;
+        this.$store.dispatch('loadSinglePlant', this.id)
         if (!this.id) {
           this.id = 'new'
           this.$store.commit('enterEditMode')
@@ -58,13 +60,22 @@ import PlantImage from '../components/PlantImage.vue'
     },
     computed: {
         plant() {
-            return this.$store.getters.loadedPlant(this.$route.params.id || 'new')
+          return this.$store.getters.singlePlant
         },
         logs() {
             return this.$store.getters.singlePlantLogs(this.$route.params.id || 'new')
         },
         editMode() {
           return this.$store.getters.editMode
+        },
+        filteredLogs() {
+          if (!this.filterText) {
+            return this.logs
+          } else {
+            return this.logs.filter((l) => {
+              return l.msg.includes(this.filterText)
+            })
+          }
         }
     },
     methods: {
@@ -78,6 +89,9 @@ import PlantImage from '../components/PlantImage.vue'
         deletePlant() {
           this.$store.dispatch('deletePlant', this.id)
           this.$router.push('/');
+        },
+        filter(filterText) {
+          this.filterText = filterText
         }
     }
   }

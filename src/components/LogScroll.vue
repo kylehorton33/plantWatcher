@@ -21,6 +21,7 @@
           </v-btn>
         </v-list-item-icon>
       </v-list-item>
+      <v-divider></v-divider>
       <Log v-for="log in logs" :log="log" :key="log.timestamp" />
     </v-list>
   </v-sheet>

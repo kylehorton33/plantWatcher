@@ -13,10 +13,14 @@ export default new Vuex.Store({
     focusedPlantId: null,
     loading: false,
     editMode: false,
+    singlePlant: null,
   },
   mutations: {
     setLoadedPlants (state, payload) {
       state.loadedPlants = payload
+    },
+    setSinglePlant (state, payload) {
+      state.singlePlant = payload
     },
     createPlant (state, payload) {
       state.loadedPlants.push(payload)
@@ -56,6 +60,15 @@ export default new Vuex.Store({
       axios.get('http://localhost:3000/plants')
         .then((res) => {
           commit('setLoadedPlants', res.data)
+        })
+        .catch((err) => console.log(err))
+      commit('setLoading', false)
+    },
+    loadSinglePlant ({commit}, payload) {
+      commit('setLoading', true)
+      axios.get('http://localhost:3000/plants/'+payload)
+        .then((res) => {
+          commit('setSinglePlant', res.data)
         })
         .catch((err) => console.log(err))
       commit('setLoading', false)
@@ -115,6 +128,9 @@ export default new Vuex.Store({
       return state.loadedPlants.sort((A, B) => {
         return A.updated_at < B.updated_at
       })
+    },
+    singlePlant (state) {
+      return state.singlePlant
     },
     loadedPlant (state) {
       return (id) => {
