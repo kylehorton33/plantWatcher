@@ -3,7 +3,9 @@
     <v-list color="transparent">
       <v-list-item>
         <v-list-item-icon class="mx-0">
-          <v-icon>{{ icon }}</v-icon>
+          <v-btn icon>
+            <v-icon>{{ icon }}</v-icon>
+          </v-btn>
         </v-list-item-icon>
         <v-list-item-content class="ml-4">
           <v-text-field
