@@ -9,22 +9,22 @@
         <v-card-title v-text="plant.name.toUpperCase()"></v-card-title>
     </v-img>
     <v-card-actions v-if="id === 'new'" class="justify-center">
-      <v-btn text @click="goToPlantPage(plant.id)">
+      <v-btn text @click="goToPlantPage(id)">
         create new
       </v-btn>
     </v-card-actions>
     <v-card-actions v-else class="justify-center">
         <!-- add loaders: https://vuetifyjs.com/en/components/buttons/ -->
-        <v-btn icon @click="waterIt(plant.id)">
+        <v-btn icon @click="waterIt(id)">
             <v-icon>mdi-watering-can-outline</v-icon>
         </v-btn>
-        <v-btn icon @click="happyButton(plant.id)">
+        <v-btn icon @click="happyButton(id)">
             <v-icon class="success--text">mdi-emoticon-happy</v-icon>
         </v-btn>
-        <v-btn icon @click="sadButton(plant.id)">
+        <v-btn icon @click="sadButton(id)">
             <v-icon class="error--text">mdi-emoticon-sad</v-icon>
         </v-btn>
-        <v-btn icon @click="goToPlantPage(plant.id)">
+        <v-btn icon @click="goToPlantPage(id)">
             <v-icon>mdi-information-outline</v-icon>
         </v-btn>
     </v-card-actions>

@@ -2,10 +2,9 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import axios from 'axios';
-import { v4 as uuidv4 } from 'uuid';
 
 Vue.use(Vuex)
-const API = "http://localhost:3000";
+const API = "http://localhost:5000";
 
 export default new Vuex.Store({
   state: {
@@ -46,12 +45,12 @@ export default new Vuex.Store({
     },
     deletePlant (state, payload) {
       state.loadedPlants = state.loadedPlants.filter((plant) => {
-        return plant.id !== payload
+        return plant.uuid !== payload
       })
     },
     deleteLog (state, payload) {
       state.loadedLogs = state.loadedLogs.filter((log) => {
-        return log.id !== payload
+        return log.uuid !== payload
       })
     }
   },
@@ -77,13 +76,10 @@ export default new Vuex.Store({
     addPlant({commit}, payload) {
       const newPlant = {
         ...payload,
-        id: uuidv4(),
-        added_at: new Date().getTime(),
-        updated_at: new Date().getTime(),
       }
       axios.post(API + '/plants', newPlant)
-        .then(() => {
-          commit('createPlant', newPlant )
+        .then((res) => {
+          commit('createPlant', res.data )
         })
         .catch((err) => console.log(err))
     },
@@ -107,12 +103,10 @@ export default new Vuex.Store({
     addLog({commit}, payload) {
       const newLog = {
         ...payload,
-        id: uuidv4(),
-        timestamp: new Date().getTime()
       }
       axios.post(API + '/logs', newLog)
-        .then(() => {
-          commit('addLog', newLog)
+        .then((res) => {
+          commit('addLog', res.data)
         })
         .catch((err) => console.log(err))
     },
@@ -136,7 +130,7 @@ export default new Vuex.Store({
     loadedPlant (state) {
       return (id) => {
         return state.loadedPlants.find((plant) => {
-          return plant.id === id
+          return plant.uuid === id
         })
       }
     },
