@@ -11,7 +11,12 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="5">
+          <v-col cols="10" offset="1" v-if="mobile">
+            <PlantImage :plant="plant" />
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
             <v-row>
               <v-col>
                 <CycleIcons :plant="plant" />
@@ -19,7 +24,7 @@
             </v-row>
             <LogScroll :logs="filteredLogs" />
           </v-col>
-          <v-col cols="7">
+          <v-col v-if="!mobile" cols="7">
             <PlantImage :plant="plant" />
           </v-col>
         </v-row>
@@ -76,7 +81,10 @@ import PlantImage from '../components/PlantImage.vue'
               return l.msg.includes(this.filterText)
             })
           }
-        }
+        },
+        mobile() {
+          return this.$vuetify.breakpoint.xs
+        },
     },
     methods: {
         goToAllPlants() {
