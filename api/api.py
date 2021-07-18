@@ -91,7 +91,7 @@ class PlantListResource(Resource):
         NAME = data["name"]
         LOCATION = data["location"]
         FILEPATH = f'static/{UUID}_{NAME}.jpg'
-        API_CALL = f'http://localhost:5000/api/image/{UUID}_{NAME}.jpg'
+        API_CALL = f'/api/image/{UUID}_{NAME}.jpg'
 
         # if there is an uploaded image
         try:
