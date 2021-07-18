@@ -60,6 +60,7 @@ export default {
     valid: true,
     name: "",
     imageUrl: "",
+    imageFile: null,
     selectedLocation: null,
     nameRules: [
       (v) => !!v || "Name is required",
@@ -81,11 +82,24 @@ export default {
         latest_pic: this.imageUrl,
         location: this.selectedLocation,
       };
+      if (this.imageFile) {
+        new_plant.imageFile = this.imageFile.split(',')[1] // remove data declaration
+      } if (this.imageUrl) {
+        new_plant.imageUrl = this.imageUrl
+      }
       this.$store.dispatch("addPlant", new_plant);
       this.$router.push("/");
     },
     onFileChange(e) {
-      this.imageUrl = URL.createObjectURL(e);
+      const selectedImage = e;
+      this.createBase64Image(selectedImage);
+    },
+    createBase64Image(fileObject) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.imageFile = e.target.result;
+      }
+      reader.readAsDataURL(fileObject)
     }
   },
 };

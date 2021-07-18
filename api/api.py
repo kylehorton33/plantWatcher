@@ -1,16 +1,32 @@
 import time
-from flask import Flask, request
+from flask import Flask, request, url_for, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_restful import Api, Resource
+from werkzeug.utils import secure_filename
+
 from flask_cors import CORS
 
 from uuid import uuid4
 
+import os
+
+from PIL import Image
+import io
+import base64
+from binascii import b2a_uu
+
+from urllib.request import urlretrieve
+
 app = Flask(__name__)
 CORS(app)
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['UPLOAD_FOLDER'] = './storage'
+
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 api = Api(app)
@@ -71,15 +87,44 @@ class PlantListResource(Resource):
 
     def post(self):
         data = request.get_json()
-        new_plant = Plant(
-            name = data["name"],
-            uuid = uuid4().hex,
-            location = data["location"],
-            latest_pic = data["latest_pic"]
-        )
+        UUID = uuid4().hex
+        NAME = data["name"]
+        LOCATION = data["location"]
+        FILEPATH = f'static/{UUID}_{NAME}.jpg'
+        API_CALL = f'http://localhost:5000/api/image/{UUID}_{NAME}.jpg'
+
+        # if there is an uploaded image
+        try:
+            i = data["imageFile"]
+            image = base64.b64decode(i)
+            img = Image.open(io.BytesIO(image))
+            img.save(FILEPATH, 'jpeg')
+            new_plant = Plant(
+                name = NAME,
+                uuid = UUID,
+                location = LOCATION,
+                latest_pic = API_CALL
+            )
+        except TypeError:
+            print("Cannot upload file")
+        except KeyError:
+            print("no image file")
+
+        # if there is an image URL
+        try:
+            url = data["imageUrl"]
+            urlretrieve(url, FILEPATH)
+            new_plant = Plant(
+                name = NAME,
+                uuid = UUID,
+                location = LOCATION,
+                latest_pic = API_CALL
+            )       
+        except KeyError:
+            print("no image url")
+
         db.session.add(new_plant)
         db.session.commit()
-        print(plant_schema.dump(new_plant))
         return plant_schema.dump(new_plant)
 
 api.add_resource(PlantListResource, '/api/plants')
@@ -129,3 +174,7 @@ class LogResource(Resource):
         return '', 204
 
 api.add_resource(LogResource, '/api/logs/<string:log_id>')
+
+@app.route('/api/image/<string:filename>')
+def serve_file(filename):
+    return send_from_directory('static', filename)
