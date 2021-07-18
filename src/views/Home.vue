@@ -29,7 +29,7 @@ import PlantGrid from '../components/PlantGrid.vue'
           return this.plants
         } else {
           return this.plants.filter((p) => {
-            return p.name.includes(this.filterText)
+            return p.name.toLowerCase().includes(this.filterText.toLowerCase())
           })
         }
       }
