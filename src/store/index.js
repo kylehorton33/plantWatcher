@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 import axios from 'axios';
 
 Vue.use(Vuex)
-const API = "/api";
+const API = "http://localhost:5000/api";
 
 export default new Vuex.Store({
   state: {
