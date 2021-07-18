@@ -5,7 +5,7 @@ from flask_marshmallow import Marshmallow
 from flask_restful import Api, Resource
 from werkzeug.utils import secure_filename
 
-from flask_cors import CORS
+#from flask_cors import CORS
 
 from uuid import uuid4
 
@@ -19,7 +19,7 @@ from binascii import b2a_uu
 from urllib.request import urlretrieve
 
 app = Flask(__name__)
-CORS(app)
+#CORS(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
