@@ -125,6 +125,7 @@ class PlantListResource(Resource):
 
         db.session.add(new_plant)
         db.session.commit()
+        print(plant_schema.dump(new_plant))
         return plant_schema.dump(new_plant)
 
 api.add_resource(PlantListResource, '/api/plants')
