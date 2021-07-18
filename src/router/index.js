@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import store from '../store'
 import Home from '../views/Home.vue'
 import PlantDetails from '../views/PlantDetails.vue'
 import AddPlant from '../views/AddPlant.vue'
@@ -37,7 +36,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  store.commit('exitEditMode')
+  window.scrollTo(0, 0)
   next()
 })
 
