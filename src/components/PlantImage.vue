@@ -1,10 +1,15 @@
 <template>
-    <v-img v-if="plant" :src="plant.latest_pic"></v-img>
+    <v-img v-if="plant" :src="imgUrl"></v-img>
 </template>
 
 <script>
 export default {
-    props: ['plant']
+    props: ['plant'],
+    computed: {
+        imgUrl() {
+            return `http://${window.location.host}/${this.plant.latest_pic}`
+        }
+    }
 }
 </script>
 
